@@ -62,10 +62,17 @@ exports.handler = async function (event) {
       }
     );
     if (!sessRes.ok) {
+      let errBody = "";
+      try {
+        errBody = await sessRes.text();
+      } catch (e) {
+        errBody = "(could not read error body)";
+      }
       return html(
         400,
         "Could not verify payment",
-        "We couldn't verify this payment with Stripe. Please contact pave@nurturaplace.com.au with your payment receipt."
+        "We couldn't verify this payment with Stripe. Please contact pave@nurturaplace.com.au with your payment receipt." +
+          `<br><br><small>Debug info (TEMPORARY — remove once working): Stripe responded with status ${sessRes.status}.<br>${errBody}</small>`
       );
     }
     session = await sessRes.json();
