@@ -1,0 +1,196 @@
+<title>Contact — PAVE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --color-bg: #ffffff;
+    --color-cream: #FAF0DD;
+    --color-lavender: #EDE8F5;
+    --color-ink: #20234C;
+    --color-ink-soft: #565A82;
+    --color-ink-faint: #8385A6;
+    --color-border: rgba(32,35,76,0.14);
+    --color-amber: #C98228;
+    --color-amber-strong: #A66A1D;
+    --color-violet: #8C53A3;
+    --color-invert-bg: #20234C;
+    --color-invert-text: #FAF0DD;
+    --color-invert-text-soft: #C9C4E0;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0; background: var(--color-bg); color: var(--color-ink);
+    font-family: "Work Sans", -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.12; letter-spacing: -0.01em; text-wrap: balance; margin:0; }
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+
+  .top-strap{ background: var(--color-ink); }
+  .top-strap .wrap{ padding-top: 9px; padding-bottom: 9px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .top-strap span{ font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-invert-text); opacity: 0.85; }
+  .lang-toggle{ display:flex; align-items:center; gap:7px; font-size: 0.72rem; font-weight:600; }
+  .lang-toggle button{ background:none; border:none; padding:0; cursor:pointer; font: inherit; color: var(--color-invert-text); opacity:0.6; }
+  .lang-toggle button[aria-current="true"]{ opacity:1; text-decoration: underline; text-underline-offset:3px; }
+  .lang-toggle .sep{ color: var(--color-invert-text); opacity:0.4; }
+
+  header.nav{ position: sticky; top:0; z-index: 40; background: color-mix(in srgb, var(--color-bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 2px solid var(--color-amber); }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding: 16px clamp(20px, 5vw, 48px); max-width: 1120px; margin: 0 auto; }
+  .logo{ font-family:"Fraunces", serif; font-weight: 700; font-size: 1.9rem; letter-spacing: -0.01em; text-decoration:none; }
+  .logo .dot{ color: var(--color-amber); }
+  .nav-links{ display:flex; align-items:center; gap: clamp(18px,3vw,32px); font-size: 0.92rem; font-weight: 500; }
+  .nav-links a.section-link{ color: var(--color-ink-soft); text-decoration:none; }
+  .nav-links a.section-link:hover{ color: var(--color-ink); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--color-violet); outline-offset: 3px; border-radius: 3px; }
+  @media (max-width: 640px){ .nav-links .section-link{ display:none; } }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: 0.92rem; text-decoration:none; border: 1px solid transparent; cursor:pointer; white-space:nowrap; }
+  .btn-indigo{ background: var(--color-ink); color:#fff; }
+  .btn-indigo:hover{ background: #171a39; }
+
+  .legal-hero{ padding: clamp(40px,6vw,64px) 0 clamp(16px,2vw,24px); }
+  .legal-hero .eyebrow{ font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color: var(--color-violet); }
+  .legal-hero h1{ font-size: clamp(2rem,4vw,2.8rem); margin-top:10px; }
+  .legal-hero .updated{ margin-top:14px; font-size:0.88rem; color: var(--color-ink-faint); }
+  .back-link{ display:inline-flex; align-items:center; gap:6px; font-size:0.88rem; font-weight:600; color: var(--color-ink-soft); text-decoration:none; margin-bottom:20px; }
+  .legal-hero .eyebrow{ display:block; }
+  .back-link:hover{ color: var(--color-ink); }
+
+  .notice{ background: var(--color-cream); border:1px solid var(--color-border); border-radius:14px; padding:16px 20px; font-size:0.9rem; line-height:1.55; color: var(--color-ink-soft); margin: 24px 0 8px; }
+  .notice strong{ color: var(--color-ink); }
+
+  .legal-content{ max-width: 74ch; padding: clamp(24px,4vw,36px) 0 clamp(64px,8vw,96px); }
+  .legal-content h2{ font-size: clamp(1.25rem,2.4vw,1.6rem); margin-top: 2.4em; margin-bottom:0.6em; }
+  .legal-content h2:first-child{ margin-top:0; }
+  .legal-content p{ margin: 0 0 1em; line-height:1.7; color: var(--color-ink-soft); }
+  .legal-content ul{ margin: 0 0 1em; padding-left:1.2em; color: var(--color-ink-soft); line-height:1.7; }
+  .legal-content li{ margin-bottom:0.4em; }
+  .legal-content a{ color: var(--color-violet); text-decoration:underline; text-underline-offset:2px; }
+
+  .contact-card{
+    background: var(--color-cream); border:1px solid var(--color-border); border-radius:20px;
+    padding: clamp(28px,4vw,40px); display:flex; flex-direction:column; gap:18px; max-width:46ch;
+  }
+  .contact-card .email-link{ font-size:1.3rem; font-weight:600; font-family:"Fraunces",serif; color: var(--color-ink); text-decoration:none; }
+  .contact-card .email-link:hover{ color: var(--color-violet); }
+  .contact-meta{ display:flex; flex-direction:column; gap:6px; font-size:0.92rem; color: var(--color-ink-soft); }
+  .btn-amber{ background: var(--color-amber); color:#fff; }
+  .btn-amber:hover{ background: var(--color-amber-strong); }
+
+  .site-footer{ background: var(--color-invert-bg); color: var(--color-invert-text-soft); padding: clamp(40px,6vw,60px) 0 0; }
+  .footer-grid{ display:grid; grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr; gap: clamp(28px,5vw,40px); padding-bottom: clamp(30px,5vw,44px); }
+  @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .footer-grid{ grid-template-columns: 1fr; } }
+  .footer-brand .logo{ font-size: 1.5rem; color: var(--color-invert-text); }
+  .footer-desc{ margin-top:14px; font-size:0.92rem; line-height:1.6; max-width:34ch; color: var(--color-invert-text-soft); }
+  .footer-ack{ margin-top:16px; font-size:0.8rem; line-height:1.55; max-width:36ch; color: color-mix(in srgb, var(--color-invert-text) 55%, transparent); }
+  .footer-heading{ font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color: var(--color-invert-text); margin:0 0 16px; }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; }
+  .footer-col a{ font-size:0.92rem; text-decoration:none; color: var(--color-invert-text-soft); }
+  .footer-col a:hover{ color: var(--color-invert-text); }
+  .social-icons{ display:flex; gap:10px; margin-top:18px; }
+  .social-icons a{ width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: rgba(250,240,221,0.1); color: var(--color-invert-text); transition: background 0.15s ease; }
+  .social-icons a:hover{ background: var(--color-amber); color:#fff; }
+  .footer-legal{ border-top: 1px solid rgba(250,240,221,0.14); padding: 20px 0 28px; display:flex; justify-content:flex-end; }
+  .footer-legal p{ font-size:0.82rem; color: color-mix(in srgb, var(--color-invert-text) 65%, transparent); text-align:right; }
+  .footer-legal a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+  .footer-legal a:hover{ color: var(--color-invert-text); }
+  @media (max-width: 560px){ .footer-legal{ justify-content:flex-start; } .footer-legal p{ text-align:left; } }
+</style>
+
+<div class="top-strap">
+  <div class="wrap">
+    <span>Part of the Nurtura Place</span>
+    <div class="lang-toggle">
+      <button type="button" aria-current="true">English</button>
+      <span class="sep">|</span>
+      <button type="button">中文</button>
+    </div>
+  </div>
+</div>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="pave-match-learn.html">PAVE<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a class="section-link" href="pave-match-learn.html#decide">Decide</a>
+      <a class="section-link" href="pave-match-learn.html#learn">Learn</a>
+      <a class="btn btn-indigo" href="pave-match-learn.html#early-access">Get early access</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="legal-hero">
+    <div class="wrap">
+      <a class="back-link" href="pave-match-learn.html">← Back to PAVE</a>
+      <span class="eyebrow">Get in touch</span>
+      <h1>We&rsquo;d love to hear from you.</h1>
+      <p class="updated">Questions about PAVE Decide, PAVE Learn, or early access — send them our way.</p>
+    </div>
+  </section>
+
+  <section class="legal-content wrap">
+    <div class="contact-card">
+      <a class="email-link" href="mailto:pave@nurturaplace.com.au">pave@nurturaplace.com.au</a>
+      <div class="contact-meta">
+        <span>Melbourne, Victoria</span>
+        <span>We usually reply within 2 business days.</span>
+      </div>
+      <div>
+        <a class="btn btn-amber" href="mailto:pave@nurturaplace.com.au">Email us</a>
+      </div>
+    </div>
+    <p style="margin-top:28px; font-size:0.95rem;">Prefer to just get started? <a href="pave-match-learn.html#early-access">Get early access to PAVE →</a></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="pave-match-learn.html" style="text-decoration:none;">PAVE<span class="dot">.</span></a>
+        <p class="footer-desc">PAVE. by Nurtura Place helps Melbourne &amp; Victoria families choose the right school and understand what happens in the classroom, with clarity and confidence.</p>
+        <p class="footer-ack">PAVE. acknowledges the Wurundjeri People of the Kulin Nation as the Traditional Owners of the land on which we work, and pays respect to Elders past and present.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Explore</p>
+        <ul>
+          <li><a href="pave-match-learn.html#decide">Decide</a></li>
+          <li><a href="pave-match-learn.html#learn">Learn</a></li>
+          <li><a href="pave-match-learn.html#about">About us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Resources</p>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">We&rsquo;re here to help</p>
+        <ul>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H16.7V3.7c-.28-.04-1.24-.12-2.35-.12-2.33 0-3.92 1.42-3.92 4.03V10H7.8v3.1h2.63v8h3.07Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3.5 9.75h3v10.75h-3V9.75Zm6.25 0h2.88v1.47h.04c.4-.76 1.38-1.56 2.85-1.56 3.05 0 3.61 2 3.61 4.6v6.24h-3v-5.53c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.92v5.63h-3V9.75Z"/></svg></a>
+          <a href="#" aria-label="WeChat"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 2.5C4.4 2.5 1 5.2 1 8.6c0 1.9 1.1 3.6 2.8 4.7l-.7 2.1 2.4-1.2c.7.2 1.3.3 2 .3h.3c-.1-.4-.1-.8-.1-1.2 0-3.6 3.4-6.5 7.6-6.5.3 0 .5 0 .8.1C15.5 4 12.3 2.5 8.5 2.5Zm-2.8 3.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm5.6 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/><path d="M15.3 9.7c-3.6 0-6.5 2.5-6.5 5.6 0 3.1 2.9 5.6 6.5 5.6.6 0 1.2-.1 1.8-.2l2.1 1.1-.6-1.9c1.5-1 2.5-2.5 2.5-4.2 0-3.1-2.9-5.6-6.5-5.6-.1 0-.2 0-.3 0Zm-2.4 3.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm4.8 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>
+        <a href="https://playwise.nurturaplace.com.au/#">Nurtura Place</a> ·
+        <a href="privacy-policy.html">Privacy</a> ·
+        <a href="contact.html">Contact</a> ·
+        © 2026 Nurtura Place &amp; PAVE.
+      </p>
+    </div>
+  </div>
+</footer>

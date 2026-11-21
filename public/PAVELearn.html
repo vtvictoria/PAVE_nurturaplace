@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PAVE Learn</title>
+
+<!-- Google tag (gtag.js) — Measurement ID G-7PNYHDM75E. Same ID used on this page, PAVEDecide.html and
+     Index.html so all three report into one GA4 property. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7PNYHDM75E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7PNYHDM75E');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Tokens ----------
+     Matches the confirmed PAVE brand system (single committed light
+     look, not theme-adaptive) so this page sits exactly on-brand
+     alongside the main PAVE Decide & Learn site. */
+  :root{
+    --color-bg: #ffffff;
+    --color-cream: #FAF0DD;
+    --color-lavender: #EDE8F5;
+    --color-hero-bg: #FAFAFC;
+    --color-ink: #20234C;
+    --color-ink-soft: #565A82;
+    --color-ink-faint: #8385A6;
+    --color-surface: #ffffff;
+    --color-border: rgba(32,35,76,0.14);
+    --color-amber: #C98228;
+    --color-amber-strong: #A66A1D;
+    --color-violet: #6E4FA3;
+    --color-violet-deep: #593E86;
+    --color-invert-bg: #20234C;
+    --color-invert-text: #FAF0DD;
+    --color-invert-text-soft: #C9C4E0;
+    --shadow-card: 0 1px 2px rgba(32,35,76,0.06), 0 12px 32px -16px rgba(32,35,76,0.18);
+    --shadow-finder: 0 4px 10px rgba(32,35,76,0.07), 0 24px 48px -20px rgba(32,35,76,0.24);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: "Work Sans", -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img,svg{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  h1,h2,h3{
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .eyebrow{
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-amber-strong);
+  }
+  p{ margin:0; }
+  .lede{
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    max-width: 46ch;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 48px);
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--color-amber);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px clamp(20px, 5vw, 48px);
+    max-width: 1120px; margin: 0 auto;
+  }
+  .logo{
+    font-family:"Fraunces", serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    letter-spacing: -0.01em;
+    text-decoration:none;
+  }
+  .logo .dot{ color: var(--color-amber); }
+  .nav-links{
+    display:flex; align-items:center; gap: clamp(16px,3vw,30px);
+    font-size: 0.92rem; font-weight: 500;
+  }
+  .nav-links a.section-link{ color: var(--color-ink-soft); text-decoration:none; }
+  .nav-links a.section-link:hover{ color: var(--color-ink); }
+  .nav-links a.section-link[aria-current="page"]{ color: var(--color-ink); font-weight:600; }
+  .nav-links a.section-link:focus-visible, a:focus-visible, button:focus-visible, select:focus-visible{
+    outline: 2px solid var(--color-violet); outline-offset: 3px; border-radius: 3px;
+  }
+  @media (max-width: 640px){ .nav-links .section-link{ display:none; } }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 12px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 0.92rem;
+    text-decoration:none; border: 1px solid transparent;
+    cursor:pointer; white-space:nowrap;
+    font-family: inherit;
+  }
+  .btn-amber{ background: var(--color-amber); color:#fff; }
+  .btn-amber:hover{ background: var(--color-amber-strong); }
+  .btn-indigo{ background: var(--color-ink); color:#fff; }
+  .btn-indigo:hover{ background: #171a39; }
+  .btn-ghost{ background:transparent; color: var(--color-ink); border-color: var(--color-border); }
+  .btn-ghost:hover{ border-color: var(--color-ink-faint); }
+  .btn:disabled{ opacity:0.55; cursor:not-allowed; }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: clamp(44px,7vw,80px) 0 clamp(96px,11vw,148px); background: var(--color-hero-bg); }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size: 0.8rem; font-weight:700; padding: 6px 13px;
+    border-radius: 999px; background: #ffffff;
+    border: 1px solid rgba(110,79,163,0.28);
+    box-shadow: 0 1px 2px rgba(32,35,76,0.05);
+    color: var(--color-violet); letter-spacing:0.1em; text-transform:uppercase;
+    margin-bottom: 22px;
+  }
+  .hero h1{ font-size: clamp(2.1rem, 4.6vw, 3.4rem); max-width: 17ch; color: var(--color-ink); }
+  .hero .tag{
+    font-family:"Fraunces", serif; font-weight:600; font-style:italic;
+    font-size: clamp(1.15rem, 2vw, 1.4rem); color: var(--color-amber-strong);
+    margin-top: 14px;
+  }
+  .hero .lede{ margin-top: 18px; }
+
+  /* ---------- Finder ---------- */
+  .finder-anchor{ position:relative; }
+  .finder{
+    background: #fff;
+    border-radius: 22px;
+    border-top: 4px solid var(--color-amber);
+    box-shadow: var(--shadow-finder);
+    padding: clamp(24px,3.4vw,34px);
+    margin-top: clamp(-72px,-6vw,-56px);
+    position: relative;
+    z-index: 5;
+  }
+  .finder-title{
+    font-family:"Fraunces", serif; font-weight:600; font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  .finder-grid{
+    display:grid; grid-template-columns: 1fr 1fr auto; gap: 16px; align-items:end;
+  }
+  @media (max-width: 780px){ .finder-grid{ grid-template-columns: 1fr; } }
+  .field label{
+    display:block; font-size: 0.72rem; font-weight:700; letter-spacing:0.09em;
+    text-transform:uppercase; color: var(--color-ink-faint); margin-bottom: 8px;
+  }
+  .field select{
+    width:100%; height:52px; border-radius: 12px; border: 1px solid var(--color-border);
+    background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="%23565A82" stroke-width="1.7"><path d="M5 7.5l5 5 5-5"/></svg>') no-repeat right 14px center;
+    background-size: 16px; appearance:none; -webkit-appearance:none;
+    padding: 0 40px 0 14px; font: inherit; font-size:0.95rem; color: var(--color-ink);
+  }
+  .field select:disabled{ color: var(--color-ink-faint); background-color:#FAFAFC; cursor:not-allowed; }
+  #find-btn{ height:52px; justify-content:center; }
+
+  /* ---------- Result reveal ---------- */
+  .result{
+    display:none;
+    background: var(--color-lavender);
+    border-radius: 20px;
+    padding: clamp(24px,3.4vw,34px);
+    margin-top: 18px;
+  }
+  .result.show{
+    display:grid; grid-template-columns: 1.1fr 272px; gap: clamp(20px,3vw,32px);
+    align-items:start;
+    animation: reveal .45s ease;
+  }
+  @media (max-width: 820px){ .result.show{ grid-template-columns: 1fr; } .result-cover{ justify-self:center; } }
+  @keyframes reveal{ from{ opacity:0; transform: translateY(-6px); } to{ opacity:1; transform:none; } }
+  .result h2{ font-size: clamp(1.4rem,2.4vw,1.8rem); color: var(--color-ink); margin-top:8px; }
+  .result p{ color: var(--color-ink-soft); margin-top:10px; max-width:52ch; line-height:1.6; }
+  .result .btn{ margin-top:18px; }
+
+  /* ---------- Product cover mockup ----------
+     A live CSS "cover" for the guide, not a static image — the state
+     badge and year both come straight from the two selects, so every
+     state/year combination automatically gets its own correct-looking
+     cover with zero image assets to manage. */
+  .cover-card{
+    position:relative;
+    background: var(--color-invert-bg);
+    border-radius: 16px;
+    overflow:hidden;
+    box-shadow: var(--shadow-card);
+    color: var(--color-invert-text);
+    display:flex; flex-direction:column;
+  }
+  .cover-card--full{
+    width:100%; max-width:222px;
+    padding: 18px 18px 16px; margin:0 auto;
+  }
+  .cover-card--mini{
+    width:74px; aspect-ratio: 3 / 3.8; flex:none;
+    padding: 9px 8px 7px;
+  }
+  .cover-confetti{ position:absolute; inset:0; pointer-events:none; z-index:0; }
+  .cover-confetti span{ position:absolute; border-radius:2px; opacity:0.92; }
+  .cover-confetti span:nth-child(1){ top:13%; right:14%; width:7px; height:7px; background:var(--color-amber); transform:rotate(12deg); }
+  .cover-confetti span:nth-child(2){ top:23%; right:29%; width:5px; height:5px; background:var(--color-violet); transform:rotate(-10deg); }
+  .cover-confetti span:nth-child(3){ top:9%; right:33%; width:4px; height:4px; background:#fff; border-radius:50%; }
+  .cover-confetti span:nth-child(4){ top:31%; right:11%; width:5px; height:5px; background:#4FB6A8; transform:rotate(20deg); }
+  .cover-confetti span:nth-child(5){ top:18%; right:21%; width:4px; height:4px; background:var(--color-amber); border-radius:50%; }
+  .cover-card--mini .cover-confetti{ display:none; }
+  .cover-top{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; position:relative; z-index:1; }
+  .cover-logo{ font-family:"Fraunces",serif; font-weight:700; font-size:0.78rem; letter-spacing:-0.01em; }
+  .cover-logo .cover-dot{ color: var(--color-amber); }
+  .cover-logo em{ font-style:normal; font-weight:500; color: var(--color-invert-text-soft); font-size:0.72em; margin-left:2px; }
+  .cover-card--mini .cover-logo{ display:none; }
+  .cover-state{
+    font-size:0.56rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    background:#fff; color: var(--color-violet); border-radius:12px; padding:3px 8px;
+    white-space:normal; line-height:1.2; text-align:left; max-width:100%;
+    position:relative; z-index:1;
+  }
+  .cover-state.is-long{ font-size:0.48rem; border-radius:8px; }
+  .cover-card--mini .cover-state{ font-size:0.44rem; padding:2px 5px; }
+  .cover-card--mini .cover-state.is-long{ font-size:0.4rem; }
+  .cover-year{
+    font-family:"Fraunces",serif; font-weight:700; line-height:1.02;
+    margin-top:18px; font-size:1.7rem; position:relative; z-index:1;
+  }
+  .cover-card--full .cover-year{ margin-top:20px; }
+  .cover-year.is-long{ font-size:1.15rem; }
+  .cover-card--mini .cover-year{ font-size:0.92rem; margin-top:auto; }
+  .cover-card--mini .cover-year.is-long{ font-size:0.68rem; }
+  .cover-tag{
+    font-family:"Fraunces",serif; font-style:italic; font-weight:500;
+    color: var(--color-invert-text-soft); font-size:0.7rem; margin-top:5px; position:relative; z-index:1;
+  }
+  .cover-card--mini .cover-tag{ display:none; }
+  .cover-desc{
+    font-size:0.66rem; line-height:1.45; color: var(--color-invert-text-soft);
+    margin-top:10px; position:relative; z-index:1;
+  }
+  .cover-card--mini .cover-desc{ display:none; }
+  .cover-inside{ margin-top:14px; position:relative; z-index:1; }
+  .cover-card--mini .cover-inside{ display:none; }
+  .cover-inside-label{
+    font-size:0.56rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    color: var(--color-invert-text-soft); padding-bottom:8px; margin-bottom:8px;
+    border-bottom: 1px solid rgba(255,255,255,0.16);
+  }
+  .cover-inside-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  .cover-inside-list li{ display:flex; align-items:center; gap:8px; }
+  .ci-num{
+    flex:none; width:16px; height:16px; border-radius:50%;
+    background: var(--color-amber); color:#fff; font-size:0.6rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cover-inside-list strong{ font-size:0.68rem; font-weight:600; color:#fff; }
+  .cover-url{
+    margin-top:14px; display:inline-block; position:relative; z-index:1;
+    background: var(--color-amber); color:#fff; font-size:0.6rem; font-weight:700;
+    letter-spacing:0.02em; border-radius:999px; padding:5px 11px;
+  }
+  .cover-card--mini .cover-url{ display:none; }
+  .cover-bar{
+    margin-top:14px; height:5px; border-radius:3px; position:relative; z-index:1;
+    background: linear-gradient(90deg, #D96B6B, #4FB6A8, var(--color-violet), #7FBF7A, var(--color-amber));
+  }
+  .cover-card--mini .cover-bar{ height:3px; margin-top:7px; }
+
+  /* Fanned "inside pages" peeking from behind the front cover — three
+     content pages hinting at what's inside (real chapter headings,
+     blurred body copy) to build curiosity, topped by the cover itself. */
+  .cover-stack{ position:relative; width:100%; max-width:272px; margin:0 auto; padding:22px 26px 14px; }
+  .cover-stack .cover-card--full{ position:relative; z-index:4; }
+  .cover-page{
+    position:absolute; top:20px; left:50%; width:100%; max-width:222px;
+    aspect-ratio: 3 / 4.5; background:#FBF6EC; border-radius:14px;
+    box-shadow: var(--shadow-card); overflow:hidden;
+  }
+  .cover-page--c{ transform: translateX(-50%) rotate(-12deg) translate(-22px,10px); z-index:1; }
+  .cover-page--b{ transform: translateX(-50%) rotate(-5deg) translate(-8px,6px); z-index:2; }
+  .cover-page--a{ transform: translateX(-50%) rotate(6deg) translate(11px,5px); z-index:3; }
+  .cover-page-head{
+    background: var(--color-violet); color:#fff; padding:10px 12px 9px;
+    font-family:"Fraunces",serif; line-height:1.25;
+  }
+  .cover-page-head span{ display:block; font-size:0.58rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; opacity:0.85; }
+  .cover-page-head strong{ display:block; font-size:0.82rem; font-weight:600; margin-top:2px; }
+  .cover-page-lines{ padding:12px; display:flex; flex-direction:column; gap:7px; }
+  .cover-page-lines span{ display:block; height:6px; border-radius:3px; background: var(--color-ink-faint); opacity:0.45; }
+
+  /* Small price-card thumbnail: too small to keep chapter headings
+     legible, so it gets a blank two-page "stack" hint instead — just
+     enough to read as a multi-page guide rather than a single sheet. */
+  .cover-stack--mini{ position:relative; width:74px; padding:5px 8px 3px; }
+  .cover-stack--mini .cover-card--mini{ position:relative; z-index:3; }
+  .cover-stack--mini .cover-page{
+    position:absolute; top:5px; left:50%; width:100%; max-width:74px;
+    aspect-ratio: 3 / 3.8; background:#FBF6EC; border-radius:8px; box-shadow: var(--shadow-card);
+  }
+  .cover-stack--mini .cover-page--b{ transform: translateX(-50%) rotate(-7deg) translate(-4px,3px); z-index:1; }
+  .cover-stack--mini .cover-page--a{ transform: translateX(-50%) rotate(5deg) translate(4px,2px); z-index:2; }
+
+  /* ---------- Generic section ---------- */
+  .section{ padding: clamp(56px,8vw,96px) 0; }
+  .section.soft{ background: #FAFAFC; }
+  .section-head{ max-width: 60ch; margin: 0 auto clamp(32px,4.4vw,48px); text-align:center; }
+  .section-head h2{ font-size: clamp(1.7rem,3.4vw,2.4rem); }
+  .section-head .lede{ margin: 14px auto 0; text-align:center; }
+
+  .cards{ display:grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2.6vw,24px); }
+  @media (max-width: 860px){ .cards{ grid-template-columns: 1fr; } }
+  .card{
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: clamp(24px,3vw,30px);
+    box-shadow: var(--shadow-card);
+    border-top: 4px solid var(--color-amber);
+  }
+  .card h3{ font-size: 1.2rem; color: var(--color-violet); margin-bottom:12px; }
+  .card p{ color: var(--color-ink-soft); line-height:1.6; }
+  .cards.benefits .card{ border-top-color: var(--color-violet); }
+  .cards.benefits .card h3{ color: var(--color-ink); }
+
+  /* ---------- Product ---------- */
+  .product{ background: var(--color-cream); }
+  .productgrid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(36px,5vw,64px); align-items:center;
+  }
+  @media (max-width: 860px){ .productgrid{ grid-template-columns: 1fr; } }
+  .productgrid h2{ font-size: clamp(1.8rem,3.4vw,2.6rem); margin-top:10px; }
+  .productgrid > div:first-child > p.lede{ margin-top:16px; max-width:46ch; }
+  .checks{ list-style:none; margin: 26px 0 0; padding:0; display:flex; flex-direction:column; gap:13px; }
+  .checks li{
+    display:flex; align-items:flex-start; gap:11px;
+    color: var(--color-ink-soft); font-size:0.98rem; line-height:1.5;
+  }
+  .checks li::before{
+    content:""; flex:none; width:20px; height:20px; margin-top:1px; border-radius:50%;
+    background: var(--color-amber);
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>') center/60% no-repeat;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>') center/60% no-repeat;
+  }
+  .price-card{
+    background:#fff; border-radius:22px; border-top:4px solid var(--color-amber);
+    box-shadow: var(--shadow-card); padding: clamp(28px,3.4vw,36px);
+  }
+  .price-card .ctitle{ font-size:1.25rem; color: var(--color-ink); margin-top:10px; min-height:2.4em; }
+  .price-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:18px; }
+  .price-row .amount{ font-family:"Fraunces",serif; font-weight:600; font-size:2.6rem; color: var(--color-ink); }
+  .price-row .amount.is-pending{ font-size:1.4rem; }
+  .price-row .placeholder-note{ font-size:0.72rem; color: var(--color-ink-faint); font-weight:600; letter-spacing:0.04em; }
+  .price-card .btn{ width:100%; justify-content:center; margin-top:20px; }
+  .price-fine{ font-size:0.82rem; color: var(--color-ink-faint); margin-top:12px; line-height:1.5; }
+  .price-fine a{ color: var(--color-ink-soft); text-decoration:underline; text-underline-offset:2px; }
+  .price-pending-note{ font-size:0.78rem; color: var(--color-ink-faint); text-align:center; margin-top:10px; display:none; }
+  .price-pending-note.show{ display:block; }
+  @keyframes pay-pulse{
+    0%   { box-shadow: 0 0 0 0 rgba(201,130,40,0.55); }
+    70%  { box-shadow: 0 0 0 14px rgba(201,130,40,0); }
+    100% { box-shadow: 0 0 0 0 rgba(201,130,40,0); }
+  }
+  #get-guide-btn.pulse{ animation: pay-pulse 1s ease-out 2; }
+  @media (prefers-reduced-motion: reduce){ #get-guide-btn.pulse{ animation: none; } }
+
+  /* ---------- Final CTA ---------- */
+  .cta-band{
+    background: var(--color-invert-bg); color: var(--color-invert-text);
+    padding: clamp(56px,8vw,88px) 0; text-align:center;
+  }
+  .cta-band .eyebrow{ color: color-mix(in srgb, var(--color-invert-text) 65%, transparent); }
+  .cta-band h2{ font-size: clamp(1.7rem,3.6vw,2.5rem); max-width: 22ch; margin: 14px auto 0; color: var(--color-invert-text); }
+  .cta-band .tag{
+    font-family:"Fraunces",serif; font-style:italic; font-weight:600;
+    color: var(--color-invert-text-soft); font-size: clamp(1.05rem,1.8vw,1.25rem);
+    margin-top: 14px;
+  }
+  .cta-band .btn{ margin-top: 30px; }
+
+  /* ---------- Footer ---------- */
+  .site-footer{ background:#fff; border-top:1px solid var(--color-border); padding: 48px 0 28px; }
+  .footer-grid{
+    display:grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px;
+    padding-bottom: 32px; border-bottom: 1px solid var(--color-border);
+  }
+  @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .footer-grid{ grid-template-columns: 1fr; } }
+  .footer-brand .logo{ font-size:1.5rem; }
+  .footer-desc{ margin-top:12px; font-size:0.9rem; color: var(--color-ink-soft); line-height:1.6; max-width:34ch; }
+  .footer-ack{ margin-top:14px; font-size:0.78rem; color: var(--color-ink-faint); line-height:1.55; max-width:34ch; }
+  .footer-heading{ font-size:0.78rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color: var(--color-ink-faint); margin-bottom:14px; }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-col a{ font-size:0.92rem; color: var(--color-ink-soft); text-decoration:none; }
+  .footer-col a:hover{ color: var(--color-ink); }
+  .footer-legal{ padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color: var(--color-ink-faint); }
+  .footer-legal a{ text-decoration:none; }
+  .footer-legal a:hover{ color: var(--color-ink-soft); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top">PAVE<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a class="section-link" href="#pain">Why PAVE Learn</a>
+      <a class="section-link" href="#complete">Complete Year Guide</a>
+      <a class="section-link" href="#" aria-current="page">Learn</a>
+      <a class="btn btn-indigo" href="#finder">Find My Guide</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="hero-badge">Learn</span>
+      <h1>So what actually happens at school?</h1>
+      <div class="tag">Curriculum, simplified for parents.</div>
+      <p class="lede">Get a clear picture of your child’s school year – what they’re learning, where they’re heading, and how you can support them. Choose your state and year to get started.</p>
+    </div>
+  </section>
+
+  <!-- FINDER -->
+  <div class="finder-anchor wrap" id="finder">
+    <div class="finder">
+      <div class="finder-title">Find your child's guide</div>
+      <div class="finder-grid">
+        <div class="field">
+          <label for="state">State / Territory</label>
+          <select id="state">
+            <option value="">Select your state</option>
+            <option>Victoria</option>
+            <option>New South Wales</option>
+            <option>Queensland</option>
+            <option>Western Australia</option>
+            <option>South Australia</option>
+            <option>Tasmania</option>
+            <option>Australian Capital Territory</option>
+            <option>Northern Territory</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="year">Year Level</label>
+          <select id="year" disabled>
+            <option value="">Select year level</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-amber" id="find-btn">Find My Guide →</button>
+      </div>
+
+      <div id="result" class="result" role="status">
+        <div class="result-text">
+          <span class="eyebrow">Your Guide</span>
+          <h2 id="rtitle"></h2>
+          <p>A clear, parent-friendly guide to what your child is learning this year.</p>
+          <a class="btn btn-indigo" href="#get-guide-btn" id="see-complete-btn">See the Complete Year Guide →</a>
+        </div>
+        <div class="result-cover" id="result-cover"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN POINTS -->
+  <section class="section" id="pain">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Understanding your child’s learning shouldn’t be so complicated.</h2>
+        <p class="lede">You want to know what's happening at school. The information just isn't always written in a way that's easy for parents to use.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>“What are they actually learning?”</h3>
+          <p>Curriculum information can be detailed, scattered and difficult to translate into everyday language.</p>
+        </div>
+        <div class="card">
+          <h3>“What to expect?”</h3>
+          <p>It isn't always obvious how this year's learning connects to what comes next.</p>
+        </div>
+        <div class="card">
+          <h3>“How can I help?”</h3>
+          <p>You want to support your child without turning home into another classroom.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Imagine knowing what the year looks like.</h2>
+      </div>
+      <div class="cards benefits">
+        <div class="card">
+          <h3>See the big picture</h3>
+          <p>Understand the six learning areas and how they connect.</p>
+        </div>
+        <div class="card">
+          <h3>Look ahead</h3>
+          <p>Know where learning should land by the end of the year and what comes next.</p>
+        </div>
+        <div class="card">
+          <h3>Help with ease</h3>
+          <p>Find simple ways to support learning at home without the stress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLETE YEAR GUIDE PRODUCT -->
+  <section class="section product" id="complete">
+    <div class="wrap productgrid">
+      <div>
+        <span class="eyebrow">Complete Year Guide</span>
+        <h2>One clear picture of your child's year.</h2>
+        <p class="lede">Everything you need to make sense of learning, support your child, and know what's ahead – brought together in one clear, practical guide.</p>
+        <ul class="checks">
+          <li>What learning looks like across the year</li>
+          <li>The six learning areas, explained</li>
+          <li>What to expect by the end of the year</li>
+          <li>What's coming next</li>
+          <li>What you can do at home to help</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <span class="eyebrow">Your Guide</span>
+        <div class="ctitle" id="ctitle">Select your state and year above</div>
+        <div class="price-row">
+          <span class="amount" id="price-amount">$14.99</span>
+          <div class="price-cover" id="price-cover"></div>
+        </div>
+        <button type="button" class="btn btn-amber" id="get-guide-btn">Get My Guide →</button>
+        <p class="price-fine">For your family · Group pricing available at <a href="mailto:pave@nurturaplace.com.au">pave@nurturaplace.com.au</a></p>
+        <p class="price-pending-note" id="pending-note">Select your state and year, then click Find My Guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band">
+    <div class="wrap">
+      <span class="eyebrow">PAVE. Learn</span>
+      <h2>Know what's happening in your child's learning.</h2>
+      <div class="tag">Less complexity. More clarity.</div>
+      <a class="btn btn-amber" href="#finder">Find My Child's Guide →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">PAVE<span class="dot">.</span></div>
+        <p class="footer-desc">PAVE. by Nurtura Place helps Melbourne &amp; Victoria families choose the right school and understand what happens in the classroom, with clarity and confidence.</p>
+        <p class="footer-ack">PAVE. acknowledges the Wurundjeri People of the Kulin Nation as the Traditional Owners of the land on which we work, and pays respect to Elders past and present.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Explore</p>
+        <ul>
+          <li><a href="PAVEDecide.html">Decide</a></li>
+          <li><a href="#top">Learn</a></li>
+          <li><a href="#about">About us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Resources</p>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">We&rsquo;re here to help</p>
+        <ul>
+          <li><a href="contact.html">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>
+        <a href="https://www.nurturaplace.com.au/#">Nurtura Place</a> ·
+        <a href="privacy-policy.html">Privacy</a> ·
+        <a href="contact.html">Contact</a> ·
+        © 2026 Nurtura Place &amp; PAVE.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Only the guides listed here actually exist today. Each is keyed
+  // "State|Year Level" and points at its own price + Stripe Payment Link.
+  // Add a line here the moment a new state/year guide is ready to sell.
+  var AVAILABLE_GUIDES = {
+    "Victoria|Foundation (Prep)": { price: "$14.99", url: "https://buy.stripe.com/eVq28t8VPdeI2HB8AOgEg01" },
+    "Victoria|Year 1":  { price: "$14.99", url: "https://buy.stripe.com/8x29AVgoh1w05TNg3ggEg02" },
+    "Victoria|Year 2":  { price: "$14.99", url: "https://buy.stripe.com/8x23cxgohcaE3LFcR4gEg03" },
+    "Victoria|Year 3":  { price: "$14.99", url: "https://buy.stripe.com/8x27sN5JD3E895Z9ESgEg04" },
+    "Victoria|Year 4":  { price: "$14.99", url: "https://buy.stripe.com/4gM5kF4Fz1w02HB7wKgEg05" },
+    "Victoria|Year 5":  { price: "$14.99", url: "https://buy.stripe.com/bJe8wR1tneiM4PJeZcgEg06" },
+    "Victoria|Year 6":  { price: "$14.99", url: "https://buy.stripe.com/5kQcN7b3Xb6Aeqj18mgEg07" },
+    "Victoria|Year 7":  { price: "$14.99", url: "https://buy.stripe.com/14AeVf3Bv5Mg81V2cqgEg08" },
+    "Victoria|Year 8":  { price: "$14.99", url: "https://buy.stripe.com/8x200leg9fmQ0zt6sGgEg09" },
+    "Victoria|Year 9":  { price: "$14.99", url: "https://buy.stripe.com/cNi5kF7RLfmQ81V4kygEg0a" },
+    "Victoria|Year 10": { price: "$14.99", url: "https://buy.stripe.com/bJeeVf4Fz8Ys95Z04igEg0b" },
+    "Victoria|Year 11": { price: "$14.99", url: "https://buy.stripe.com/dRm14p9ZTcaEcib04igEg0c" },
+    "Victoria|Year 12": { price: "$14.99", url: "https://buy.stripe.com/aFaaEZ2xrcaE0zt4kygEg0d" }
+  };
+
+  var yearsByState = {
+    "Victoria": ["Foundation (Prep)","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "New South Wales": ["Kindergarten","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "Queensland": ["Prep","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "Western Australia": ["Pre-primary","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "South Australia": ["Reception","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "Tasmania": ["Prep","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "Australian Capital Territory": ["Preschool","Kindergarten","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"],
+    "Northern Territory": ["Transition","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12"]
+  };
+
+  var stateSel = document.getElementById('state');
+  var yearSel = document.getElementById('year');
+  var findBtn = document.getElementById('find-btn');
+  var result = document.getElementById('result');
+  var rtitle = document.getElementById('rtitle');
+  var ctitle = document.getElementById('ctitle');
+  var priceAmount = document.getElementById('price-amount');
+  var resultCover = document.getElementById('result-cover');
+  var priceCover = document.getElementById('price-cover');
+  var getGuideBtn = document.getElementById('get-guide-btn');
+  var seeCompleteBtn = document.getElementById('see-complete-btn');
+  var pendingNote = document.getElementById('pending-note');
+  var currentGuideUrl = null;
+
+  function guideKey(){ return stateSel.value + '|' + yearSel.value; }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  // Builds the "cover" mockup for whatever state/year is currently
+  // selected. This is generated live from CSS + the two select values —
+  // not a static image — so every one of the 100+ possible state/year
+  // combinations automatically gets a correctly-labelled cover with no
+  // per-guide artwork to create or keep in sync. The "What's inside" list
+  // mirrors the real guide's cover (same three chapters for every guide,
+  // since the structure is consistent) so the front page itself carries
+  // the big-topics teaser, not just the fanned pages behind it. If a real
+  // photographed cover ever exists for a specific guide, swap this
+  // function's output for an <img> using a COVER_IMAGES["State|Year"]
+  // lookup, the same pattern as AVAILABLE_GUIDES above, and fall back to
+  // this mockup for every combination that doesn't have one yet.
+  function coverCardHTML(state, year, variant){
+    var stateLabel = state ? state.toUpperCase() : 'AUSTRALIA';
+    var yearLabel = year || 'Learn';
+    var yearLongClass = yearLabel.length > 9 ? ' is-long' : '';
+    var stateLongClass = stateLabel.length > 10 ? ' is-long' : '';
+    return ''
+      + '<div class="cover-card cover-card--' + variant + '">'
+      +   '<div class="cover-confetti" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>'
+      +   '<div class="cover-top">'
+      +     '<span class="cover-logo">PAVE<span class="cover-dot">.</span> <em>Learn</em></span>'
+      +     '<span class="cover-state' + stateLongClass + '">' + escapeHtml(stateLabel) + '</span>'
+      +   '</div>'
+      +   '<div class="cover-year' + yearLongClass + '">' + escapeHtml(yearLabel) + '</div>'
+      +   '<div class="cover-tag">The Complete Parent Guide</div>'
+      +   '<p class="cover-desc">A plain-English guide to what this year covers, and what&rsquo;s worth paying attention to, subject by subject.</p>'
+      +   '<div class="cover-inside">'
+      +     '<div class="cover-inside-label">What&rsquo;s inside</div>'
+      +     '<ol class="cover-inside-list">'
+      +       '<li><span class="ci-num">1</span><strong>The Big Picture</strong></li>'
+      +       '<li><span class="ci-num">2</span><strong>The Learning Map</strong></li>'
+      +       '<li><span class="ci-num">3</span><strong>Making It Practical</strong></li>'
+      +     '</ol>'
+      +   '</div>'
+      +   '<div class="cover-bar"></div>'
+      +   '<span class="cover-url">pave.nurturaplace.com.au</span>'
+      + '</div>';
+  }
+
+  // Builds one fanned "inside page" — a real chapter heading (to create
+  // curiosity) over a few blurred/greyed-out lines standing in for body
+  // copy nobody can read yet. Same three headings for every guide since
+  // the guide structure is consistent across states/years.
+  function pageHTML(partLabel, title, lineWidths){
+    var lines = lineWidths.map(function(w){ return '<span style="width:' + w + '%"></span>'; }).join('');
+    return '<div class="cover-page-head"><span>' + escapeHtml(partLabel) + '</span><strong>' + escapeHtml(title) + '</strong></div>'
+      + '<div class="cover-page-lines">' + lines + '</div>';
+  }
+
+  // Wraps the front cover together with its fanned back pages. Full size
+  // gets all three real chapter peeks; the price-card thumbnail is too
+  // small for legible headings, so it gets a blank two-page hint instead.
+  function coverStackHTML(state, year, variant){
+    var front = coverCardHTML(state, year, variant);
+    if(variant === 'mini'){
+      return '<div class="cover-stack cover-stack--mini">'
+        + '<div class="cover-page cover-page--b"></div>'
+        + '<div class="cover-page cover-page--a"></div>'
+        + front
+        + '</div>';
+    }
+    return '<div class="cover-stack">'
+      + '<div class="cover-page cover-page--c">' + pageHTML('Part 1 of 3', 'The Big Picture', [86,68,78,56]) + '</div>'
+      + '<div class="cover-page cover-page--b">' + pageHTML('Part 2 of 3', 'The Learning Map', [80,64,72]) + '</div>'
+      + '<div class="cover-page cover-page--a">' + pageHTML('Part 3 of 3', 'Making It Practical', [74,58,66,48]) + '</div>'
+      + front
+      + '</div>';
+  }
+
+  function renderCovers(){
+    resultCover.innerHTML = coverStackHTML(stateSel.value, yearSel.value, 'full');
+    priceCover.innerHTML = coverStackHTML(stateSel.value, yearSel.value, 'mini');
+  }
+  renderCovers(); // seed a generic PAVE. Learn cover before any selection is made
+
+  stateSel.addEventListener('change', function(){
+    yearSel.innerHTML = '<option value="">Select year level</option>';
+    var years = yearsByState[stateSel.value] || [];
+    years.forEach(function(y){
+      var opt = document.createElement('option');
+      opt.value = y; opt.textContent = y;
+      yearSel.appendChild(opt);
+    });
+    yearSel.disabled = !stateSel.value;
+    result.classList.remove('show');
+  });
+
+  yearSel.addEventListener('change', function(){
+    result.classList.remove('show');
+  });
+
+  findBtn.addEventListener('click', function(){
+    if(!stateSel.value || !yearSel.value){
+      findBtn.classList.add('shake');
+      if(!stateSel.value){ stateSel.focus(); } else { yearSel.focus(); }
+      return;
+    }
+    var label = stateSel.value + ' · ' + yearSel.value;
+    rtitle.textContent = label;
+    ctitle.textContent = label + ' Complete Year Guide';
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    renderCovers();
+    updatePriceCard();
+  });
+
+  // Reflects whether the chosen state/year actually has a guide for sale
+  // yet — all Victoria year levels do today (see AVAILABLE_GUIDES above).
+  function updatePriceCard(){
+    var guide = AVAILABLE_GUIDES[guideKey()];
+    currentGuideUrl = guide ? guide.url : null;
+    if(guide){
+      priceAmount.textContent = guide.price;
+      priceAmount.classList.remove('is-pending');
+      getGuideBtn.textContent = 'Get My Guide →';
+      pendingNote.textContent = "You'll be taken to secure Stripe checkout.";
+      pendingNote.classList.remove('show');
+    } else {
+      priceAmount.textContent = 'Coming soon';
+      priceAmount.classList.add('is-pending');
+      getGuideBtn.textContent = 'Notify Me When Ready';
+      pendingNote.textContent = stateSel.value && yearSel.value
+        ? 'This guide isn’t published yet for ' + stateSel.value + ' · ' + yearSel.value + '. All Victoria year levels are available now.'
+        : 'Select your state and year, then click Find My Guide.';
+      pendingNote.classList.add('show');
+    }
+  }
+
+  // "See the Complete Year Guide" hands the customer straight to the
+  // payment button — scrolls it into view and gives it a brief pulse
+  // so it's unmistakably the next click.
+  seeCompleteBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    getGuideBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    getGuideBtn.classList.remove('pulse');
+    void getGuideBtn.offsetWidth; // restart the animation if clicked twice
+    getGuideBtn.classList.add('pulse');
+  });
+
+  getGuideBtn.addEventListener('click', function(){
+    if(!stateSel.value || !yearSel.value){
+      document.getElementById('finder').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if(!stateSel.value){ stateSel.focus(); }
+      return;
+    }
+    if(currentGuideUrl){
+      // Send the buyer straight to Stripe Checkout for this guide.
+      window.location.href = currentGuideUrl;
+      return;
+    }
+    // No guide for this state/year yet — offer to notify instead of taking payment for it.
+    var label = stateSel.value + ' · ' + yearSel.value;
+    window.location.href = 'mailto:pave@nurturaplace.com.au?subject=' + encodeURIComponent('Notify me: ' + label + ' guide') +
+      '&body=' + encodeURIComponent('Please let me know when the ' + label + ' Complete Year Guide is available.');
+  });
+})();
+</script>
+
+</body>
+</html>
