@@ -36,7 +36,7 @@ exports.handler = async function (event) {
     return html(
       400,
       "Missing information",
-      "This link is missing required details. Please contact pave@nurturaplace.com.au with your payment receipt."
+      "This link is missing required details. Please contact feedback@nurturaplace.com.au with your payment receipt."
     );
   }
 
@@ -45,7 +45,7 @@ exports.handler = async function (event) {
     return html(
       500,
       "Setup incomplete",
-      "The site isn't fully configured yet (missing STRIPE_SECRET_KEY). Please contact pave@nurturaplace.com.au."
+      "The site isn't fully configured yet (missing STRIPE_SECRET_KEY). Please contact feedback@nurturaplace.com.au."
     );
   }
 
@@ -62,17 +62,10 @@ exports.handler = async function (event) {
       }
     );
     if (!sessRes.ok) {
-      let errBody = "";
-      try {
-        errBody = await sessRes.text();
-      } catch (e) {
-        errBody = "(could not read error body)";
-      }
       return html(
         400,
         "Could not verify payment",
-        "We couldn't verify this payment with Stripe. Please contact pave@nurturaplace.com.au with your payment receipt." +
-          `<br><br><small>Debug info (TEMPORARY — remove once working): Stripe responded with status ${sessRes.status}.<br>${errBody}</small>`
+        "We couldn't verify this payment with Stripe. Please contact feedback@nurturaplace.com.au with your payment receipt."
       );
     }
     session = await sessRes.json();
@@ -80,7 +73,7 @@ exports.handler = async function (event) {
     return html(
       500,
       "Something went wrong",
-      "Please contact pave@nurturaplace.com.au with your payment receipt."
+      "Please contact feedback@nurturaplace.com.au with your payment receipt."
     );
   }
 
@@ -88,7 +81,7 @@ exports.handler = async function (event) {
     return html(
       402,
       "Payment not completed",
-      "This purchase doesn't show as paid yet. If you believe this is a mistake, contact pave@nurturaplace.com.au."
+      "This purchase doesn't show as paid yet. If you believe this is a mistake, contact feedback@nurturaplace.com.au."
     );
   }
 
@@ -98,7 +91,7 @@ exports.handler = async function (event) {
       403,
       "Link already used",
       "This download link has already been used once. Each purchase link only works a single time. " +
-        "If you need your guide re-sent, email pave@nurturaplace.com.au with your payment receipt."
+        "If you need your guide re-sent, email feedback@nurturaplace.com.au with your payment receipt."
     );
   }
 
@@ -106,7 +99,7 @@ exports.handler = async function (event) {
   //    Only letters, numbers, hyphens and underscores allowed in the product
   //    code, so this can never be tricked into reading an unexpected file.
   if (!/^[a-zA-Z0-9_-]+$/.test(product)) {
-    return html(400, "Invalid request", "Please contact pave@nurturaplace.com.au with your payment receipt.");
+    return html(400, "Invalid request", "Please contact feedback@nurturaplace.com.au with your payment receipt.");
   }
   const fileName = `${product}.pdf`;
 
@@ -131,24 +124,10 @@ exports.handler = async function (event) {
   }
 
   if (!fileBuffer) {
-    // Diagnostic info to make this fixable quickly instead of guessing blind.
-    let dirListing = "";
-    try {
-      dirListing = JSON.stringify({
-        __dirname,
-        cwd: process.cwd(),
-        dirnameContents: fs.readdirSync(__dirname),
-      });
-    } catch (e) {
-      dirListing = "could not read directory listing";
-    }
     return html(
       500,
       "Guide file not found",
-      `We couldn't locate the file for "${product}" on the server yet. ` +
-        `<br><br><small>Debug info (send this to your developer): triedPaths=${JSON.stringify(
-          triedPaths
-        )}<br>${dirListing}</small>`
+      `We couldn't locate the file for "${product}" on the server yet. Please contact feedback@nurturaplace.com.au with your payment receipt.`
     );
   }
 
